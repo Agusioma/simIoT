@@ -47,8 +47,8 @@ public class SensorData {
     {
         super();
     }
-    public SensorData(String ts,
-                      String device,
+    public SensorData(/*String ts,
+                      String device,*/
                       Double co,
                       Double humidity,
                       Boolean light,
@@ -56,8 +56,8 @@ public class SensorData {
                       Boolean motion,
                       Double smoke,
                       Double temp) {
-        this.ts = ts;
-        this.device = device;
+      /*  this.ts = ts;
+        this.device = device;*/
         this.co = co;
         this.humidity = humidity;
         this.light = light;
