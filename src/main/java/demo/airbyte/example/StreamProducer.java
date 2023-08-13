@@ -1,40 +1,32 @@
 package demo.airbyte.example;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
 public class StreamProducer {
-    private static final Logger log = LoggerFactory.getLogger(StreamProducer.class);
     public void sendToTopic(JsonNode sensorData) {
-        log.info("Demo Producer");
 
-        String bootstrapServers = "127.0.0.1:9092";
+        String bootstrapServerAddress = "127.0.0.1:9092";
+        String kafkaTopicName = "quickstart-events71";
 
-        // create Producer properties
+        // Setting the Kafka Producer properties
         Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServerAddress);
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // create the producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
         // create a producer record
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("quickstart-events7", sensorData.toString());
-
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(kafkaTopicName, sensorData.toString());
         // send data - asynchronous
         producer.send(producerRecord);
 
-        // flush data - synchronous
-        //producer.flush();
-        // flush and close producer
-        //producer.close();
     }
 
 }

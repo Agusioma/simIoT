@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class SensorData {
 
-
     private String ts;
 
     private String device;
@@ -26,29 +25,12 @@ public class SensorData {
 
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-
-
-    /**
-     * //@param lpg
-     * //@param temp
-     * //@param motion
-     * //@param light
-     * //@param smoke
-     * //@param humidity
-     * //@param co
-     * //@param device
-     * //@param ts
-     */
     public SensorData()
     {
         super();
     }
-    public SensorData(/*String ts,
-                      String device,*/
+    public SensorData(String ts,
+                      String device,
                       Double co,
                       Double humidity,
                       Boolean light,
@@ -56,8 +38,8 @@ public class SensorData {
                       Boolean motion,
                       Double smoke,
                       Double temp) {
-      /*  this.ts = ts;
-        this.device = device;*/
+     this.ts = ts;
+        this.device = device;
         this.co = co;
         this.humidity = humidity;
         this.light = light;
